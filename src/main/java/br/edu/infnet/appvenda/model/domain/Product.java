@@ -2,7 +2,6 @@ package br.edu.infnet.appvenda.model.domain;
 
 public class Product {
 	
-	//TODO mudei o nome pois pra mim faz mais sentido, se quiser que eu mude só me mandar uma mensagem.
 	public String name;
 	
 	public Integer code;

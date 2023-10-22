@@ -4,24 +4,32 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
-import br.edu.infnet.appvenda.model.domain.Seller;
-import br.edu.infnet.appvenda.model.service.SellerService;
+import br.edu.infnet.appvenda.model.domain.Pharmaceutical;
+import br.edu.infnet.appvenda.model.domain.Product;
+import br.edu.infnet.appvenda.model.service.ProductService;
+import br.edu.infnet.appvenda.model.service.PharmaceuticalService;
+import br.edu.infnet.appvenda.model.service.CleaningService;
 
-@Order(1)
-@Component
-public class LoadSeller implements ApplicationRunner {
-	
+@SuppressWarnings("unused")
+public class ProductLoader implements ApplicationRunner {
+
 	private static final String FILE_NAME = "sellers.txt";
 	
 	@Autowired
-	private SellerService service;
+	private ProductService productService;
+	
+	@Autowired
+	private PharmaceuticalService pharmaceuticalService;
+	
+	@Autowired
+	private CleaningService cleaningService;
 	
 	private void readTxt (String fileName){
 		
@@ -32,13 +40,6 @@ public class LoadSeller implements ApplicationRunner {
             while ((line = bufferedReader.readLine()) != null) {
 
                 String[] data = line.split(",");
-
-    			Seller seller = new Seller();
-    			seller.setName(data[0]);
-    			seller.setCpf(data[1]);
-    			seller.setEmail(data[2]);
-    			
-    			service.insert(seller);
                 
             }
             
@@ -55,10 +56,10 @@ public class LoadSeller implements ApplicationRunner {
     	
         readTxt(FILE_NAME);
 
-        for (Seller seller : service.get()) {
-            System.out.println(seller);
+        for (Product product : productService.get()) {
+            System.out.println(product);
         }
 		
 	}
-
+	
 }

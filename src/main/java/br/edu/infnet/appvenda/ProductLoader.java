@@ -4,23 +4,28 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 
+import br.edu.infnet.appvenda.model.domain.Cleaning;
 import br.edu.infnet.appvenda.model.domain.Pharmaceutical;
 import br.edu.infnet.appvenda.model.domain.Product;
-import br.edu.infnet.appvenda.model.service.ProductService;
-import br.edu.infnet.appvenda.model.service.PharmaceuticalService;
+import br.edu.infnet.appvenda.model.domain.Seller;
 import br.edu.infnet.appvenda.model.service.CleaningService;
+import br.edu.infnet.appvenda.model.service.PharmaceuticalService;
+import br.edu.infnet.appvenda.model.service.ProductService;
+import br.edu.infnet.appvenda.model.service.SellerService;
 
-@SuppressWarnings("unused")
+@Order(2)
 public class ProductLoader implements ApplicationRunner {
 
-	private static final String FILE_NAME = "sellers.txt";
+	private static final String FILE_NAME = "files/sellers.txt";
+	
+	@Autowired
+	private SellerService sellerService;
 	
 	@Autowired
 	private ProductService productService;
@@ -40,6 +45,26 @@ public class ProductLoader implements ApplicationRunner {
             while ((line = bufferedReader.readLine()) != null) {
 
                 String[] data = line.split(",");
+            	
+            	String[] dataWithoutFirstPosition = new String[data.length - 2];
+            	
+            	Seller seller = sellerService.findByEmail(data[1]);
+                
+                if(data[0] == "P") {
+                	
+                	Cleaning cleaning = cleaningService.stringsToObject(dataWithoutFirstPosition);
+                	cleaning.setSeller(seller);
+                	
+                	productService.insert(cleaning);
+                
+                } else if( data[0] == "C" ) {
+                	
+                	Pharmaceutical pharmaceutical = pharmaceuticalService.stringsToObject(dataWithoutFirstPosition);
+                	pharmaceutical.setSeller(seller);
+                	
+                	productService.insert(pharmaceutical);
+                	
+                }
                 
             }
             

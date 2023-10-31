@@ -1,0 +1,4 @@
+Desinfetante ABC,Limpeza e Desinfecção,750 ml,Lavanda,6.5,8.99,Garrafa Plástica,"Aplicar o produto e deixar agir por 5 minutos",Marca X,4.2,true,5
+Detergente Multiuso XYZ,Limpeza Geral,500 ml,Limão,7.0,3.49,Recipiente de Vidro,"Diluir uma pequena quantidade em água e aplicar",Marca Y,4.5,true,6
+Lustra-Móveis Premium,Limpeza de Móveis,250 ml,Neutro,7.0,5.99,Garrafa Plástica,"Aplicar diretamente na superfície e polir",Marca Z,4.7,true,7
+Sabão em Pó SuperClean,Lavanderia,1 kg,Sem Fragrância,9.0,7.99,Pacote,Seguir instruções na embalagem,Marca W,4.0,true,7

@@ -4,15 +4,16 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appvenda.model.domain.Pharmaceutical;
-import br.edu.infnet.appvenda.model.service.PharmaceuticalService;
 
 @Order(2)
 @Component
@@ -20,13 +21,23 @@ public class LoadPharmaceutical implements ApplicationRunner {
 	
 	private static final String FILE_NAME = "pharmaceuticals.txt";
 	
-	@Autowired
-	private PharmaceuticalService pharmaceuticalService;
+	private static Map<Integer, Pharmaceutical> pharmaceuticalByCode = new HashMap<Integer, Pharmaceutical>();
 	
-	private void readTxt(String fileName) {
+	private static void insertPharmaceutical(Pharmaceutical cleaning) {
+		
+		pharmaceuticalByCode.put(cleaning.getCode(), cleaning);
+		
+	}
+	
+	private static Collection<Pharmaceutical> getCleaningProducts() {
+		
+		return pharmaceuticalByCode.values();
+		
+	}
+	
+	private static void readTxt(String fileName) {
 
-        try (BufferedReader bufferedReader = 
-        		new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"))) {
         	
             String line;
             
@@ -48,7 +59,7 @@ public class LoadPharmaceutical implements ApplicationRunner {
                 pharmaceutical.setHasStock(Boolean.parseBoolean(data[9]));
                 pharmaceutical.setCode(Integer.parseInt(data[10]));
 
-                pharmaceuticalService.insert(pharmaceutical);
+                insertPharmaceutical(pharmaceutical);
                 
             }
             
@@ -65,7 +76,7 @@ public class LoadPharmaceutical implements ApplicationRunner {
     	
         readTxt(FILE_NAME);
 
-        for (Pharmaceutical pharmaceutical : pharmaceuticalService.get()) {
+        for (Pharmaceutical pharmaceutical : getCleaningProducts()) {
             System.out.println(pharmaceutical);
         }
 		

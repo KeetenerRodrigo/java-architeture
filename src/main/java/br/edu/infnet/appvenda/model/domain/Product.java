@@ -1,6 +1,21 @@
 package br.edu.infnet.appvenda.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Product")
 public class Product {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	
 	public String name;
 	
@@ -9,6 +24,10 @@ public class Product {
 	public Float price;
 	
 	public Boolean hasStock;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "sellerId")
+	private Seller seller;
 
     public String getName() {
         return name;
@@ -41,6 +60,14 @@ public class Product {
 
 	public void setHasStock(Boolean hasStock) {
 		this.hasStock = hasStock;
+	}
+	
+	public Seller getSeller() {
+		return seller;
+	}
+
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 	
 	@Override

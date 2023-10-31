@@ -1,0 +1,4 @@
+Aspirin,Analgésico,500 mg,Frasco, 100 comprimidos,Tomar um comprimido com água conforme necessário,Bayer,5.99,4.5,true,1
+Amoxicillin,Antibiótico,250 mg,Frasco, 20 cápsulas,Tomar uma cápsula a cada 8 horas,Generic,9.99,4.2, true,2
+Lipitor,Medicamento para Colesterol,10 mg,Caixa, 30 comprimidos,Tomar um comprimido diariamente à noite,Pfizer,19.99,4.8,true,3
+Zyrtec,Antialérgico,10 mg,Caixa, 45 comprimidos,Tomar um comprimido diariamente para alergias,Johnson & Johnson,12.49,4.6,true,4

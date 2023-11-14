@@ -1,31 +1,27 @@
-package br.edu.infnet.appvenda.model.domain;
+package br.edu.infnet.appvenda.models.domains;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Positive;
 
 @Entity
 @Table(name = "Product")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+    @Size(min = 3, max = 100)
 	public String name;
 	
-	public Integer code;
-	
+    @Positive
 	public Float price;
 	
 	public Boolean hasStock;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne()
 	@JoinColumn(name = "sellerId")
 	private Seller seller;
 
@@ -36,15 +32,6 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-
-
-	public Integer getCode() {
-		return code;
-	}
-
-	public void setCode(Integer code) {
-		this.code = code;
-	}
 
 	public Float getPrice() {
 		return price;
@@ -75,7 +62,7 @@ public class Product {
     	
         return "Cleaning{" +
                 	"name='" + name + '\'' +
-                	", code='" + code + '\'' +
+                	", id='" + id + '\'' +
                 	", price=" + price +
                 	", hasStock='" + hasStock + '\'' +
                '}';

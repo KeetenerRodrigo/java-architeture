@@ -11,8 +11,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import br.edu.infnet.appvenda.model.domain.Pharmaceutical;
-import br.edu.infnet.appvenda.model.service.PharmaceuticalService;
+import br.edu.infnet.appvenda.models.domains.Pharmaceutical;
+import br.edu.infnet.appvenda.models.services.PharmaceuticalService;
 
 @Order(3)
 @Component
@@ -51,7 +51,7 @@ public class PharmaceuticalLoader implements ApplicationRunner {
     	
         readTxt(FILE_NAME);
 
-        for (Pharmaceutical pharmaceutical : pharmaceuticalService.get()) {
+        for (Pharmaceutical pharmaceutical : pharmaceuticalService.findAll()) {
             System.out.println(pharmaceutical);
         }
 		

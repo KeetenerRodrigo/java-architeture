@@ -1,10 +1,11 @@
-package br.edu.infnet.appvenda.model.domain;
+package br.edu.infnet.appvenda.models.domains;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -17,6 +18,7 @@ public class Pharmaceutical extends Product{
     
     private String type;
     
+    @Size(min = 1, max = 10, message = "A dosagem deve ter entre {min} e {max} caracteres.")
     private String dosage;
     
     private String packaging;
@@ -96,7 +98,6 @@ public class Pharmaceutical extends Product{
                 ", brand='" + brand + '\'' +
                 ", price=" + price +
                 ", customerRating=" + customerRating +
-                ", code=" + code +
                 ", hasStock=" + hasStock +
                 '}';
     }

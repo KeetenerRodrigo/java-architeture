@@ -11,8 +11,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import br.edu.infnet.appvenda.model.domain.Cleaning;
-import br.edu.infnet.appvenda.model.service.CleaningService;
+import br.edu.infnet.appvenda.models.domains.Cleaning;
+import br.edu.infnet.appvenda.models.services.CleaningService;
 
 @Order(4)
 @Component
@@ -52,7 +52,7 @@ public class CleaningLoader implements ApplicationRunner {
     	
         readTxt(FILE_NAME);
 
-        for (Cleaning cleaning : cleaningService.get()) {
+        for (Cleaning cleaning : cleaningService.findAll()) {
             System.out.println(cleaning);
         }
 		

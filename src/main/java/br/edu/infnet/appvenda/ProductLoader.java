@@ -10,14 +10,14 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 
-import br.edu.infnet.appvenda.model.domain.Cleaning;
-import br.edu.infnet.appvenda.model.domain.Pharmaceutical;
-import br.edu.infnet.appvenda.model.domain.Product;
-import br.edu.infnet.appvenda.model.domain.Seller;
-import br.edu.infnet.appvenda.model.service.CleaningService;
-import br.edu.infnet.appvenda.model.service.PharmaceuticalService;
-import br.edu.infnet.appvenda.model.service.ProductService;
-import br.edu.infnet.appvenda.model.service.SellerService;
+import br.edu.infnet.appvenda.models.domains.Cleaning;
+import br.edu.infnet.appvenda.models.domains.Pharmaceutical;
+import br.edu.infnet.appvenda.models.domains.Product;
+import br.edu.infnet.appvenda.models.domains.Seller;
+import br.edu.infnet.appvenda.models.services.CleaningService;
+import br.edu.infnet.appvenda.models.services.PharmaceuticalService;
+import br.edu.infnet.appvenda.models.services.ProductService;
+import br.edu.infnet.appvenda.models.services.SellerService;
 
 @Order(2)
 public class ProductLoader implements ApplicationRunner {
@@ -81,7 +81,7 @@ public class ProductLoader implements ApplicationRunner {
     	
         readTxt(FILE_NAME);
 
-        for (Product product : productService.get()) {
+        for (Product product : productService.findAll()) {
             System.out.println(product);
         }
 		

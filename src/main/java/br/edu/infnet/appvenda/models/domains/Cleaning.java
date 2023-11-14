@@ -1,4 +1,4 @@
-package br.edu.infnet.appvenda.model.domain;
+package br.edu.infnet.appvenda.models.domains;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,8 +21,6 @@ public class Cleaning extends Product {
     private String fragrance;
     
     private double pHLevel;
-    
-    private double price;
     
     private String packaging;
     
@@ -96,6 +94,7 @@ public class Cleaning extends Product {
         this.customerRating = customerRating;
     }
     
+    @Override
     public String toString() {
     	
         return "Cleaning{" +
@@ -104,12 +103,10 @@ public class Cleaning extends Product {
                 ", volumeOrWeight=" + volumeOrWeight +
                 ", fragrance='" + fragrance + '\'' +
                 ", pHLevel=" + pHLevel +
-                ", price=" + price +
                 ", packaging='" + packaging + '\'' +
                 ", usageInstructions='" + usageInstructions + '\'' +
                 ", brand='" + brand + '\'' +
                 ", customerRating=" + customerRating +
-                ", code=" + code +
                 ", hasStock=" + hasStock +
                 '}';
         

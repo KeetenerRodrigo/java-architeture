@@ -12,17 +12,22 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appvenda.models.domains.Pharmaceutical;
+import br.edu.infnet.appvenda.models.domains.Seller;
 import br.edu.infnet.appvenda.models.services.PharmaceuticalService;
+import br.edu.infnet.appvenda.models.services.SellerService;
 
 @Order(3)
 @Component
 public class PharmaceuticalLoader implements ApplicationRunner {
 	
 	private static final String FILE_NAME = "files/pharmaceuticals.txt";
-	
+
 	@Autowired
+	private SellerService sellerService;
+
+    @Autowired
 	private PharmaceuticalService pharmaceuticalService;
-	
+
 	private void readTxt(String fileName) {
 
         try (BufferedReader bufferedReader = 
@@ -32,9 +37,13 @@ public class PharmaceuticalLoader implements ApplicationRunner {
             
             while ((line = bufferedReader.readLine()) != null) {
                 
-                Pharmaceutical pharmaceutical = pharmaceuticalService.stringsToObject(line.split(","));
+                Pharmaceutical pharmaceutical = this.pharmaceuticalService.stringsToObject(line.split(","));
+
+		        Seller seller = sellerService.findByEmail(line.split(",")[10]);
+                
+		        pharmaceutical.setSeller(seller);
                 		
-                pharmaceuticalService.insert(pharmaceutical);
+                this.pharmaceuticalService.insert(pharmaceutical);
                 
             }
             
@@ -51,7 +60,7 @@ public class PharmaceuticalLoader implements ApplicationRunner {
     	
         readTxt(FILE_NAME);
 
-        for (Pharmaceutical pharmaceutical : pharmaceuticalService.findAll()) {
+        for (Pharmaceutical pharmaceutical : this.pharmaceuticalService.findAll()) {
             System.out.println(pharmaceutical);
         }
 		

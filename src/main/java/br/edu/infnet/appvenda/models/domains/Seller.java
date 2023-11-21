@@ -24,7 +24,6 @@ public class Seller {
     @Column(unique = true)
 	private String cpf;
 	
-	@Pattern(regexp = "/^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+\\.([a-z]+)?$/i")
     @Column(unique = true)
 	private String email;
 	
@@ -33,8 +32,16 @@ public class Seller {
     private Address address;
 	
     @JoinColumn(name = "sellerId")
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Product> products;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 	
 	public String getName() {
 		return name;
@@ -79,12 +86,9 @@ public class Seller {
 	@Override
     public String toString() {
     	
-        return "Seller{" +
-                "name='" + name + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", email=" + email +
-                ", products='" + products + '\'' +
-                '}';
+        return "Nome: " + name +
+                ", Cpf: " + cpf +
+                ", Email: " + email;
         
     }
 	

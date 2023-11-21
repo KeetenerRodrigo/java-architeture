@@ -11,6 +11,7 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Positive
 	private Integer id;
 	
     @Size(min = 3, max = 100)
@@ -24,6 +25,14 @@ public class Product {
 	@ManyToOne()
 	@JoinColumn(name = "sellerId")
 	private Seller seller;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -60,12 +69,9 @@ public class Product {
 	@Override
 	public String toString() {
     	
-        return "Cleaning{" +
-                	"name='" + name + '\'' +
-                	", id='" + id + '\'' +
-                	", price=" + price +
-                	", hasStock='" + hasStock + '\'' +
-               '}';
+        return  "Nome: '" + name + '\'' +
+                	", Preço: " + price +
+                	", Tem em Estoque? '" + hasStock + '\'';
         
     }
 	

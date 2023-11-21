@@ -12,16 +12,21 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.appvenda.models.domains.Cleaning;
+import br.edu.infnet.appvenda.models.domains.Seller;
 import br.edu.infnet.appvenda.models.services.CleaningService;
+import br.edu.infnet.appvenda.models.services.SellerService;
 
 @Order(4)
 @Component
 public class CleaningLoader implements ApplicationRunner {
 	
-	private static final String FILE_NAME = "files/cleanings.txt";
-	
 	@Autowired
 	private CleaningService cleaningService;
+
+	@Autowired
+	private SellerService sellerService;
+	
+	private static final String FILE_NAME = "files/cleanings.txt";
 	
 	private void readTxt(String fileName) {
 
@@ -35,7 +40,11 @@ public class CleaningLoader implements ApplicationRunner {
                 
                 Cleaning cleaning = cleaningService.stringsToObject(data);
 
-                cleaningService.insert(cleaning);
+                Seller seller = sellerService.findByEmail(data[11]);
+
+                cleaning.setSeller(seller);
+
+                this.cleaningService.insert(cleaning);
                 
             }
             
@@ -52,7 +61,7 @@ public class CleaningLoader implements ApplicationRunner {
     	
         readTxt(FILE_NAME);
 
-        for (Cleaning cleaning : cleaningService.findAll()) {
+        for (Cleaning cleaning : this.cleaningService.findAll()) {
             System.out.println(cleaning);
         }
 		

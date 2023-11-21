@@ -8,6 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class FileLoggerService {
 	
 	private static final String FILE_NAME = "files/log.txt";

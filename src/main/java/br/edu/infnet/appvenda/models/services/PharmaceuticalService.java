@@ -1,20 +1,20 @@
 package br.edu.infnet.appvenda.models.services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.appvenda.models.domains.Pharmaceutical;
+import br.edu.infnet.appvenda.models.domains.Seller;
 import br.edu.infnet.appvenda.models.repositories.IPharmaceuticalRepository;
 
 @Service
 public class PharmaceuticalService {
 
-	private IPharmaceuticalRepository pharmaceuticalRepository;
-
 	@Autowired
-	private SellerService sellerService;
+	private IPharmaceuticalRepository pharmaceuticalRepository;
 
 	public Pharmaceutical stringsToObject(String[] data) {
 
@@ -30,7 +30,6 @@ public class PharmaceuticalService {
 		pharmaceutical.setPrice(Float.parseFloat(data[7]));
 		pharmaceutical.setCustomerRating(Double.parseDouble(data[8]));
 		pharmaceutical.setHasStock(Boolean.parseBoolean(data[9]));
-		pharmaceutical.setSeller(sellerService.findByEmail(data[10]));
 
 		return pharmaceutical;
 
@@ -45,6 +44,18 @@ public class PharmaceuticalService {
 	public Collection<Pharmaceutical> findAll() {
 
 		return (Collection<Pharmaceutical>) pharmaceuticalRepository.findAll();
+
+	}
+
+	public void delete(Integer id){
+
+		pharmaceuticalRepository.deleteById(id);
+
+	}
+
+	public List<Pharmaceutical> findByName(String name) {
+
+		return pharmaceuticalRepository.findByName(name);
 
 	}
 

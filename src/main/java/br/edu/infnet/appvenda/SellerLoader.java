@@ -34,7 +34,11 @@ public class SellerLoader implements ApplicationRunner {
 
     			Seller seller = service.stringsToObject(line.split(","));
     			
-    			service.insert(seller);
+    			if(service.findByCpf(seller.getCpf()) == null) {
+    				
+        			service.insertWithAddress(seller);
+    				
+    			}
                 
             }
             

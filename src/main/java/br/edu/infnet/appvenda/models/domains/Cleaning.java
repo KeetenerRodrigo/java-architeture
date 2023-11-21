@@ -9,10 +9,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Cleaning")
 public class Cleaning extends Product {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
     
     private String type;
     
@@ -97,18 +93,16 @@ public class Cleaning extends Product {
     @Override
     public String toString() {
     	
-        return "Cleaning{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", volumeOrWeight=" + volumeOrWeight +
-                ", fragrance='" + fragrance + '\'' +
-                ", pHLevel=" + pHLevel +
-                ", packaging='" + packaging + '\'' +
-                ", usageInstructions='" + usageInstructions + '\'' +
-                ", brand='" + brand + '\'' +
-                ", customerRating=" + customerRating +
-                ", hasStock=" + hasStock +
-                '}';
+        return  "Nome: " + name +
+                ", Tipo= " + type +
+                ", Volume= " + volumeOrWeight +
+                ", Fragrância: " + fragrance +
+                ", PH: " + pHLevel +
+                ", Pacote: " + packaging +
+                ", Instruções de uso: " + usageInstructions +
+                ", Marca: " + brand +
+                ", Avaliações dos clientes: " + customerRating +
+                ", Tem em estoque? " + hasStock;
         
     }
     

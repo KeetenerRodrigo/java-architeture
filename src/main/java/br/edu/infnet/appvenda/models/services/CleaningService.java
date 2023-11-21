@@ -1,6 +1,7 @@
 package br.edu.infnet.appvenda.models.services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,9 +14,6 @@ public class CleaningService {
 
 	@Autowired
 	private ICleaningRepository cleaningRepository;
-
-	@Autowired
-	private SellerService sellerService;
 
 	public Cleaning stringsToObject(String[] data) {
 
@@ -32,7 +30,6 @@ public class CleaningService {
 		cleaning.setBrand(data[8]);
 		cleaning.setCustomerRating(Double.parseDouble(data[9]));
 		cleaning.setHasStock(Boolean.parseBoolean(data[10]));
-		cleaning.setSeller(sellerService.findByEmail(data[11]));
 
 		return cleaning;
 
@@ -44,9 +41,21 @@ public class CleaningService {
 
 	}
 
+	public void delete(Integer id){
+
+		cleaningRepository.deleteById(id);
+
+	}
+
 	public Collection<Cleaning> findAll() {
 
 		return (Collection<Cleaning>) cleaningRepository.findAll();
+
+	}
+
+	public List<Cleaning> findByName(String name) {
+
+		return cleaningRepository.findByName(name);
 
 	}
 

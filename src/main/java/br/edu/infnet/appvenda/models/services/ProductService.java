@@ -34,6 +34,18 @@ public class ProductService {
 		
 	}
 
+	public void delete(Integer id){
+
+		productRepository.deleteById(id);
+
+	}
+
+	public List<Product> findByName(String name) {
+
+		return productRepository.findByName(name);
+
+	}
+
 	public Long findCount() {
 
         return productRepository.count();

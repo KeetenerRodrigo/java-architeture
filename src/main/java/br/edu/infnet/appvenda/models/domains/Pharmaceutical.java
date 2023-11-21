@@ -11,10 +11,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "Pharmaceutical")
 public class Pharmaceutical extends Product{
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
     
     private String type;
     
@@ -89,17 +85,15 @@ public class Pharmaceutical extends Product{
     
     @Override
     public String toString() {
-        return "Pharmaceutical{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", dosage=" + dosage +
-                ", packaging='" + packaging + '\'' +
-                ", usageInstructions='" + usageInstructions + '\'' +
-                ", brand='" + brand + '\'' +
-                ", price=" + price +
-                ", customerRating=" + customerRating +
-                ", hasStock=" + hasStock +
-                '}';
+        return "Nome: " + name +
+                ", Tipo= " + type +
+                ", Dosagem= " + dosage +
+                ", Quantidade por embalagem:' " + quantityInPackageDescription +
+                ", Pacote: " + packaging +
+                ", Instruções de uso: " + usageInstructions +
+                ", Marca: " + brand +
+                ", Avaliações dos clientes: " + customerRating +
+                ", Tem em estoque? " + hasStock;
     }
     
 }

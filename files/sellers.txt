@@ -1,2 +1,2 @@
-John Doe,400000000,john.doe@gmail.com
-Jane Doe,400000001,jane.doe@gmail.com
+John Doe,400.785.698-26,john.doe@gmail.com,15840000
+Jane Doe,482.549.038-75,jane.doe@gmail.com,15840000

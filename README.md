@@ -1,4 +1,4 @@
-# App Paws
+# App
 Esse repositório pertence ao projeto da disciplina Arquitetura Java do curso de pós-graduação em Arquitetura de Software do Instituto Infnet.
 
 ## Como rodar o projeto
